@@ -45,6 +45,8 @@ const pages = {
   reports: "Reportes",
 }
 
+const toast = { open:true, message: "", success:false }
+
 const inputs = {
     // buttons
     load:"Cargando",
@@ -84,7 +86,8 @@ const Catalogs = {
   success: success,
   rol:rol,
   estatus:estatus,
-  pages:pages
+  pages:pages,
+  toast:toast,
 }
 
 export default Catalogs;

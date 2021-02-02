@@ -2,39 +2,20 @@ import React, { useState, useEffect } from 'react';
 import css from './Form.styles';
 import { checkEmail, checkPasswordLogin } from './validations';
 import catalogs from '../../constants/catalogs';
-//import api from '../../constants/api';
-//import axios from 'axios';
+import api from '../../constants/api';
+import axios from 'axios';
 
-// import {
-//     Snackbar,
-//     TextField,
-//     Button,
-//     InputAdornment,
-//     IconButton,
-//     Typography,
-// } from '@material-ui/core'
+
 import { View, TextInput, Button, Text } from 'react-native';
-//import Visibility from '@material-ui/icons/Visibility';
-//import VisibilityOff from '@material-ui/icons/VisibilityOff';
-
-//import * as ACTIONS from '../../store/actions';
-const { errors, vertical, horizontal, inputStr } = catalogs
+const { errors, toast, inputStr } = catalogs
 
 
 
 const SignInForm = (props) => {
-    const { addAuthUser } = props
-
-
+    const { addAuthUser, addToast } = props
     const [error, setError] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
-    //snackbar
-    const [open, setOpen] = useState(false);
-    const [toastMessage, setToastMessage] = useState('');
-    const [toastType, setToastType] = useState({});
     const [loading, setLoading] = useState(false);
-
-
 
     const [formData, setFormData] = useState({
         email: undefined,
@@ -71,12 +52,6 @@ const SignInForm = (props) => {
         setErrorMessage('')
     }
 
-    const handleCloseToast = () => {
-        setOpen(false);
-    };
-
-
-
     //MAIN FUNCTIONS
     const handleChange = (newText, field) => {
         setFormData({ ...formData, [field]: newText });
@@ -85,28 +60,22 @@ const SignInForm = (props) => {
     const handleSignIn = (event) => {
         event.preventDefault();
         setLoading(true)
-
-        // axios.post(api.signIn, {
-        //     headers: api.headerConfig,
-        //     ...formData
-        // }).then((res) => {
-        //     setToastMessage(res.data.message)
-        //     if(res.data.success){
-        //         addAuthUser(res.data.data)
-        //         // add authUser to redux session
-        //         setToastType(classes.success)
-        //     }
-        //     else setToastType(classes.error)
-        //     setOpen(true)
-        //     setLoading(false)
-        // }).catch(err => {
-        //     setToastMessage(errors.serverError)
-        //     setToastType(classes.error)
-        //     setOpen(true)
-        //     setLoading(false)
-        // })
+        axios.post(api.signIn, {
+            headers: api.headerConfig,
+            ...formData
+        }).then((res) => {
+            toast['message'] = res.data.message
+            if (res.data.success) {
+                addAuthUser(res.data.data)
+                toast['success'] = true
+            }
+        }).catch(err => {
+            toast['message'] = true
+        }).finaly(() => {
+            setLoading(false)
+            addToast(toast)
+        })
     }
-
 
     useEffect(() => {
         if (typeof email !== 'undefined') validate(formData)
@@ -116,6 +85,7 @@ const SignInForm = (props) => {
     return (
         <View>
             <TextInput
+                clasName={css.input}
                 autoCapitalize="none"
                 autoCorrect={false}
                 placeholder="Email"
@@ -126,6 +96,7 @@ const SignInForm = (props) => {
                 onChangeText={(newText) => handleChange(newText, "email")}
             />
             <TextInput
+                clasName={css.input}
                 autoCapitalize="none"
                 autoCorrect={false}
                 placeholder="Password"
@@ -137,7 +108,7 @@ const SignInForm = (props) => {
             />
             {error && <Text>{errorMessage}</Text>}
             <Button
-                // className={classes.inputs}
+                className={classes.button}
                 title={loading ? inputStr.load : inputStr.login}
                 onPress={() => handleSignIn()}
                 variant="contained"

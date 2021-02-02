@@ -14,6 +14,14 @@ const css = StyleSheet.create({
     // modal: {
     //     background: "#fff"
     // },
+    input:{
+        padding:5,
+        marginBottom:5,
+    },
+    button:{
+        backgroundColor:'#000',
+        marginBottom:5
+    },
     form: {
         width: '70%',
         display: 'flex',
