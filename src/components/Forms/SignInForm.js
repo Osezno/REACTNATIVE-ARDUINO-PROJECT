@@ -57,8 +57,8 @@ const SignInForm = (props) => {
         setFormData({ ...formData, [field]: newText });
     };
 
-    const handleSignIn = (event) => {
-        event.preventDefault();
+    const handleSignIn = () => {
+       
         setLoading(true)
         axios.post(api.signIn, {
             headers: api.headerConfig,
@@ -71,7 +71,7 @@ const SignInForm = (props) => {
             }
         }).catch(err => {
             toast['message'] = true
-        }).finaly(() => {
+        }).finally(() => {
             setLoading(false)
             addToast(toast)
         })
@@ -85,7 +85,7 @@ const SignInForm = (props) => {
     return (
         <View>
             <TextInput
-                clasName={css.input}
+                style={css.input}
                 autoCapitalize="none"
                 autoCorrect={false}
                 placeholder="Email"
@@ -96,11 +96,11 @@ const SignInForm = (props) => {
                 onChangeText={(newText) => handleChange(newText, "email")}
             />
             <TextInput
-                clasName={css.input}
+                style={css.input}
                 autoCapitalize="none"
                 autoCorrect={false}
                 placeholder="Password"
-                type={showPassword ? 'text' : 'password'}
+                type={'password'}
                 label={inputStr.password}
                 name="password"
                 value={password || ''}
@@ -108,7 +108,7 @@ const SignInForm = (props) => {
             />
             {error && <Text>{errorMessage}</Text>}
             <Button
-                className={classes.button}
+                style={css.button}
                 title={loading ? inputStr.load : inputStr.login}
                 onPress={() => handleSignIn()}
                 variant="contained"

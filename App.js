@@ -1,30 +1,28 @@
-import React, { useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, { useEffect, useState } from 'react';
 
-import HomeView from './src/views/HomeView';
-import LoginView from './src/views/LoginView';
 
-// ver como usar useEffect
-// usar redux
-// crerar un login
 
-const Stack = createStackNavigator();
-
+import MainView from './src/MainView';
+//redux
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducers from './src/store/reducers';
 
 
 
 const App: () => React$Node = () => {
+
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeView} />
-        <Stack.Screen name="Details" component={LoginView} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={createStore(reducers)}>
+      <MainView />
+    </Provider>
+
   );
 };
 
 
 
 export default App;
+
+

@@ -17,10 +17,12 @@ const css = StyleSheet.create({
     input:{
         padding:5,
         marginBottom:5,
+        color:'#fff'
+       
     },
     button:{
-        backgroundColor:'#000',
-        marginBottom:5
+        marginTop:5,
+        marginBottom:5,
     },
     form: {
         width: '70%',
@@ -41,26 +43,7 @@ const css = StyleSheet.create({
         backgroundColor: color.error,
         ...box
     },
-    // pictureWrap: {
-    //     width: '100px',
-    //     height: '100px',
-    //     position: 'relative',
-    //     backgroundSize: 'cover',
-    //     borderRadius: '50px',
-    //     margin: '0 auto',
-    //     //  borderRadius:'50%',
-    // },
-    // picture: {
-    //     width: '100px',
-    //     height: '100px',
-
-    //     //  borderRadius:'50%',
-    // },
-    // belowDivIcon: {
-    //     position: 'absolute',
-    //     bottom: '0px',
-    //     right: '0px',
-    // }
+  
 });
 
 export default css

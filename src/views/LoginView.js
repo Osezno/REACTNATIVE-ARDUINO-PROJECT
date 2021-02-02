@@ -5,20 +5,21 @@ import * as ACTIONS from '../store/actions';
 import SignInForm from '../components/Forms/SignInForm.js';
 import { connect } from 'react-redux';
 
-const LoginView = ({ navigation, route }) => {
-    const {addAuthUser, addToast}
+const LoginView = (props) => {
+    const { addAuthUser, addToast, navigation, route } = props
     let body;
     if (route.params?.post) body = route.params?.post;
     else body = "no hay posts";
 
-    
+
 
 
     return (
         <View style={css.sectionContainer}>
-            <Text style={css.sectionTitle}>{body}</Text>
-            <SignInForm addAuthUser={(authUser)=>{addAuthUser(authUser)}} addToast={(toast)=>addToast(toast)} />
+
+            <SignInForm addAuthUser={(authUser) => { addAuthUser(authUser) }} addToast={(toast) => addToast(toast)} />
             <Button
+                style={css.button}
                 title="Go to Home... again"
                 onPress={() => navigation.navigate('Home')}
             />

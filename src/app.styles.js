@@ -13,6 +13,9 @@ const css = StyleSheet.create({
     body: {
       backgroundColor: Colors.white,
     },
+    button:{
+      margin:5,
+    },
     sectionContainer: {
       marginTop: 32,
       paddingHorizontal: 24,
