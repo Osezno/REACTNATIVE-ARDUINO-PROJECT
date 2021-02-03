@@ -1,0 +1,5 @@
+react-native run-android
+react-native link
+react-devtools
+// Axios use localhost server ip and turn off firewall only for the testing
+// While using server  in localhost

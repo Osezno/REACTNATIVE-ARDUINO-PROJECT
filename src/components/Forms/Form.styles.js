@@ -16,13 +16,15 @@ const css = StyleSheet.create({
     // },
     input:{
         padding:5,
-        marginBottom:5,
-        color:'#fff'
-       
+        marginBottom:25,
+        color:'#000'
     },
     button:{
         marginTop:5,
-        marginBottom:5,
+        marginBottom:15,
+    },
+    error:{
+        color:'#cb2d3e'
     },
     form: {
         width: '70%',
@@ -30,6 +32,9 @@ const css = StyleSheet.create({
         flexDirection: 'column',
         margin: '0 auto',
         marginBottom: '10px',
+    },
+    formContainer:{
+        marginBottom: 18,
     },
     inputs: {
         margin: 4,

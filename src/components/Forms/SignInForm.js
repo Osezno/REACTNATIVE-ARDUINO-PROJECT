@@ -58,20 +58,22 @@ const SignInForm = (props) => {
     };
 
     const handleSignIn = () => {
-       
+        
         setLoading(true)
         axios.post(api.signIn, {
             headers: api.headerConfig,
             ...formData
         }).then((res) => {
+            console.log("holi2",res.data)
             toast['message'] = res.data.message
             if (res.data.success) {
-                addAuthUser(res.data.data)
                 toast['success'] = true
             }
         }).catch(err => {
-            toast['message'] = true
+            console.log("test",err)
+            toast['message'] = errors.serverError
         }).finally(() => {
+            
             setLoading(false)
             addToast(toast)
         })
@@ -83,7 +85,7 @@ const SignInForm = (props) => {
 
 
     return (
-        <View>
+        <View style={css.formContainer}>
             <TextInput
                 style={css.input}
                 autoCapitalize="none"
@@ -100,22 +102,21 @@ const SignInForm = (props) => {
                 autoCapitalize="none"
                 autoCorrect={false}
                 placeholder="Password"
-                type={'password'}
+                secureTextEntry={true} 
                 label={inputStr.password}
                 name="password"
                 value={password || ''}
                 onChangeText={(newText) => handleChange(newText, "password")}
             />
-            {error && <Text>{errorMessage}</Text>}
+            {error && <Text  >{errorMessage}</Text>}
             <Button
                 style={css.button}
                 title={loading ? inputStr.load : inputStr.login}
                 onPress={() => handleSignIn()}
-                variant="contained"
-                color="primary"
+               
                 type="submit"
                 disabled={error || loading}
-                style={{ textTransform: 'none', marginTop: 10 }}
+               
             />
         </View>
     )

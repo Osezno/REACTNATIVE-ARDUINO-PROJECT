@@ -30,6 +30,7 @@ const HomeView = ({ navigation }) => {
                         <View style={css.sectionContainer}>
                             <Text style={css.sectionTitle}>oseznos first App</Text>
                             <Button
+                                style={css.button}
                                 title="Go to Details"
                                 onPress={() => navigation.navigate('Details', { post: "holi" })}
                             />

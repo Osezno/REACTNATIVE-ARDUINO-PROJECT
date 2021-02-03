@@ -1,4 +1,4 @@
-const mainUrl = "http://localhost:1337/";
+const mainUrl = "http://192.168.1.77:1337/";
 
 const headersConfig = (token, file) => {
 

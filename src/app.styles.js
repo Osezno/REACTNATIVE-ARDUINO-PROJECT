@@ -14,10 +14,12 @@ const css = StyleSheet.create({
       backgroundColor: Colors.white,
     },
     button:{
-      margin:5,
+      marginTop:15,
+      backgroundColor:'#000'
     },
     sectionContainer: {
       marginTop: 32,
+      marginBottom: 32,
       paddingHorizontal: 24,
     },
     sectionTitle: {
