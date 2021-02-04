@@ -1,8 +1,9 @@
-import { StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-const css = StyleSheet.create({
+const style = theme => {
+  const css = StyleSheet.create({
     scrollView: {
       backgroundColor: Colors.lighter,
     },
@@ -11,16 +12,17 @@ const css = StyleSheet.create({
       right: 0,
     },
     body: {
-      backgroundColor: Colors.white,
+      //  backgroundColor: colors.,
     },
-    button:{
-      marginTop:15,
-      backgroundColor:'#000'
+    button: {
+      marginTop: 15,
+      backgroundColor: '#000'
     },
-    sectionContainer: {
+    sectionContainer:{
       marginTop: 32,
       marginBottom: 32,
       paddingHorizontal: 24,
+      backgroundColor: theme.color.primary
     },
     sectionTitle: {
       fontSize: 24,
@@ -45,5 +47,8 @@ const css = StyleSheet.create({
       textAlign: 'right',
     },
   });
+  return css
+}
 
-  export default css
+
+export default style
