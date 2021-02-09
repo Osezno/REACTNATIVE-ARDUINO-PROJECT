@@ -64,13 +64,11 @@ const SignInForm = (props) => {
             headers: api.headerConfig,
             ...formData
         }).then((res) => {
-            console.log("holi2",res.data)
             toast['message'] = res.data.message
             if (res.data.success) {
                 toast['success'] = true
             }
         }).catch(err => {
-            console.log("test",err)
             toast['message'] = errors.serverError
         }).finally(() => {
             

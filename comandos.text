@@ -3,3 +3,5 @@ react-native link
 react-devtools
 // Axios use localhost server ip and turn off firewall only for the testing
 // While using server  in localhost
+// bug ton bluetooth node_modules\react-native-bluetooth-serial\android\src\main\java\com\rusel\RCTBluetoothSerial\RCTBluetoothSerialPackage.java:23: error: method does not override or implement a method from a supertype
+comentar //@Override
