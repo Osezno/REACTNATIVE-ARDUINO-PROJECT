@@ -18,13 +18,13 @@ import BluetoothSerial from 'react-native-bluetooth-serial'
 import catalogs from '../constants/catalogs'
 import style from '../app.styles';
 import { useTheme } from 'react-native-paper';
-
+//import { Icon } from 'react-native-elements'
 const HomeView = ({ navigation }) => {
     // USEsTATE
     const tema = useTheme();
     let css = style(tema)
     const { arduino } = catalogs;
-    const { onOFF, BPM, patrones, patronesDos, modos, colorSelected, colores, colores2 } = arduino;
+    const { onOFF, BPM, patrones, patronesDos, modos, colorSelected, colores, colores2 ,colores3} = arduino;
     const [isEnabled, setIsEnabled] = useState(false);
     const [devices, setDevices] = useState([]);
     const [discovering, setDiscovering] = useState(false);
@@ -59,7 +59,7 @@ const HomeView = ({ navigation }) => {
         BluetoothSerial.disconnect().then((res) => {
             BluetoothSerial.connect(id)
                 .then((res) => {
-                    console.log(res);
+                    setConnected(res)
                 })
                 .catch((err) => console.log(err.message))
         })
@@ -120,7 +120,7 @@ const HomeView = ({ navigation }) => {
             <View style={css.buttonWrap} key={code}>
 
                 <View style={css.largeButton}>
-                    <Button color={code ==="a" ? "#000" : "#ff1ecf"} title={`${name}`} onPress={() => BluetoothWrite(code)} />
+                    <Button color={code === "a" ? "#000" : "#ff1ecf"} title={`${name}`} onPress={() => BluetoothWrite(code)} />
                 </View>
             </View>
         )
@@ -140,9 +140,6 @@ const HomeView = ({ navigation }) => {
     }
 
     useEffect(() => {
-        BluetoothSerial.isConnected().then((res) => {
-            setConnected(res)
-        })
 
         Promise.all([
             BluetoothSerial.isEnabled(),
@@ -166,7 +163,12 @@ const HomeView = ({ navigation }) => {
 
         })
     }, [BluetoothSerial])
+    useEffect(() => {
+        BluetoothSerial.isConnected().then((res) => {
+            setConnected(res)
+        })
 
+    }, [BluetoothSerial, connected])
     return (
         <>
             <StatusBar barStyle="dark-content" />
@@ -200,12 +202,28 @@ const HomeView = ({ navigation }) => {
                 </View>
                 <View style={css.colorWrap}>
                     {Object.keys(colorSelected).map((prop) =>
-                        <View style={css.midButton}>
-                            <Button color={"#607d8b"} key={prop} title={`${colorSelected[prop][0]}`} onPress={() => colorSelect(colorSelected[prop][1])} />
+                        <View style={css.midButton} key={prop}>
+                            <Button color={"#607d8b"}  title={`${colorSelected[prop][0]}`} onPress={() => colorSelect(colorSelected[prop][1])} />
                         </View>
 
                     )}
                 </View>
+                {/* <Icon
+                    name='g-translate'
+                    color='#00aced' />
+
+                <Icon
+                    name='sc-telegram'
+                    type='evilicon'
+                    color='#517fa4'
+                />
+
+                <Icon
+                    reverse
+                    name='sc-telegram'
+                    type='ionicon'
+                    color='#517fa4'
+                /> */}
                 {Object.keys(patronesDos).map((prop) => bpmButton("Repetir", patronesDos[prop][0], patronesDos[prop][1]))}
                 {Object.keys(BPM).map((prop) => bpmButton("Velocidad", BPM[prop][0], BPM[prop][1]))}
                 <View style={css.titleWrap}>
@@ -239,17 +257,20 @@ const HomeView = ({ navigation }) => {
                                     <Button color={colores2[prop][1]} key={prop} title={""} onPress={() => colorSelection(colores2[prop][2])} />
                                 </View>
                             )}
-
                         </View>
-
+                        <View style={css.colorWrap}>
+                            {Object.keys(colores3).map((prop) =>
+                                <View style={css.color}>
+                                    <Button color={colores3[prop][1]} key={prop} title={""} onPress={() => colorSelection(colores2[prop][2])} />
+                                </View>
+                            )}
+                        </View>
                     </View>
                     <View style={css.buttonWrap} key={"a"}>
                         <View style={css.largeButton}>
-                            <Button  key={"a"} color={"#000"} title={"Cancelar"} onPress={() => setModalVisible(false)} />
+                            <Button key={"a"} color={"#000"} title={"Cancelar"} onPress={() => setModalVisible(false)} />
                         </View>
                     </View>
-
-
                 </View>
             </Modal>
         </>

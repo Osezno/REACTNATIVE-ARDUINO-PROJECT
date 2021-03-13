@@ -64,24 +64,31 @@ const arduinoCodes = {
   },
   colores:{
     blanco:["Blanco","#ffffff","w"],
-    otroAmarillo:["Amarillo 2","#ffe52d","Y"],
-    amarillo:["Amarillo","#fcff2d","y"],
-    verde:["Verde","#3dff0d","g"],
-    azul:["Azul","#0d20ff","b"],
-    cyan:["Cyan","#00bcd4","c"],
-    fosfo:["Verde Fosfo","#cddc39","f"]
-   
+    otroAmarillo:["Amarillo 2","rgb(250,100,0)","Y"],
+    amarillo:["Amarillo","rgb(150,150,0)","y"],
+    verde:["Verde","rgb(0,150,0)","g"],
+    azul:["Azul","rgb(0,0,150)","b"],
+    cyan:["Cyan","rgb(0,150,150)","c"],
   },
   colores2:{
-    morado:["Morado","#851792","m"],
-    violeta:["Violeta","#521792","v"],
-    
-    naranja:["Naranja","#ff9800","n"],
+    morado:["Morado","rgb(150,0,150)","m"],
+    violeta:["Violeta","rgb(150,0,250)","v"],
+    naranja:["Naranja","rgb(250,50,0)","n"],
     otroNaranja:["Naranja 2","#ff5722","o"],
-    rosa:["Rosa","#ff2288","p"],
-    rojo:["Rojo","#ff0d0d","r"],
+    rosa:["Rosa","rgb(250,0,150)","p"],
+    rojo:["Rojo","rgb(150,0,0)","r"], 
+  },
+  colores3:{
+    fosfo:["Verde Fosfo","rgb(150,250,0)","f"],
+    magenta:["Amarillo 2","rgb(250,0,250)","i"],
+    spring:["Amarillo","rgb(0,250,128)","k"],
+    azure:["Verde","rgb(0,128,250)","ñ"],
+    azul:["Azul","rgb(0,255,204)","("],
+    cyan:["Cyan","rgb(255,50,50)",")"],
+    fosfo:["Verde Fosfo","rgb(150,150,150)",";"]
    
-  }
+  },
+
 }
 
 
