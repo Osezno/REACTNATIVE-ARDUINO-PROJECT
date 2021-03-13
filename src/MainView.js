@@ -14,8 +14,8 @@ import { Snackbar } from 'react-native-paper';
 
 const MainView = (props) => {
 
-    const {   toast, removeToast } = props;
-   // const css = useStyles();
+    const { toast, removeToast } = props;
+    // const css = useStyles();
     const [open, setOpen] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
     const [toastType, setToastType] = useState({});
@@ -47,17 +47,30 @@ const MainView = (props) => {
         <>
             <NavigationContainer>
                 <Stack.Navigator>
-                    <Stack.Screen name="Home" component={HomeView} />
+                    <Stack.Screen
+                        name="@Osezno"
+                        component={HomeView}
+                        options={{
+                            title:'Osezno Room Control',
+                            headerStyle: {
+                                backgroundColor: '#000',
+                            },
+                            headerTintColor: '#fff',
+                            headerTitleStyle: {
+                                fontWeight: 'bold',
+                            }
+                        }}
+                    />
                     <Stack.Screen name="Details" component={LoginView} />
                 </Stack.Navigator>
             </NavigationContainer>
-             <Snackbar
+            <Snackbar
                 visible={open}
                 onDismiss={onDismissSnackBar}
                 duration={5000}
             >
                 {toastMessage}
-            </Snackbar> 
+            </Snackbar>
 
         </>
     );
@@ -74,7 +87,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchAuthUser: () => dispatch(ACTIONS.fetchAuthUser()),
-       removeToast: () => dispatch(ACTIONS.removeToast()),
+        removeToast: () => dispatch(ACTIONS.removeToast()),
     }
 }
 

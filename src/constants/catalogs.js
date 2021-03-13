@@ -26,6 +26,71 @@ const errors = {
   recovery: "Tu token expiro o es incorrecto",
   serverError: "Estamos experimentando problemas, nuestros tecnicos estan trabajando para resolverlos."
 }
+const arduinoCodes = {
+  onOFF:{
+    abanico:["Abanico","3", "2"],
+    focoRosa:["Foco Rosa","7","6"],
+    focoAzul:["Foco Azul", "5","4"], 
+  },
+  BPM:{
+    aumentarBPM:["-" , "+"],
+  },
+  patrones:{
+    apagarNP:["Apagar", "a"],
+    mismoColor:["Mismo color","O"],
+    unoYuno:["Uno y uno","U"],
+    mitadYmitad:["Mitad y mitad","M"],
+    tres:["Tres","T"],
+    choque:["Choque","X"],
+    blink:["Parpadear","P"],
+    scanner:["Scanner","S"],
+    gradiante:["Gradiante","G"],
+    randoms:["Aleatorio","J"],
+  },
+  patronesDos:{
+    repeat:["R","N"],
+  },
+  modos:{
+    onEjercicio:["Ejercicio","E", "e"],
+    onDuoEstrobo:["Duo Estrobo","Z","z"],
+    onEstroboRosa:["Estrobo Rosa","H", "h"],
+    onEstroboAzul:["Estrobo Azúl","Q","q"],
+  },
+  colorSelected:{
+    color1:["Color 1", "A"],
+    color2:["Color 2", "B"],
+    color3:["Color 3", "C"],
+    color4:["Color 4","D"]
+  },
+  colores:{
+    blanco:["Blanco","#ffffff","w"],
+    otroAmarillo:["Amarillo 2","#ffe52d","Y"],
+    amarillo:["Amarillo","#fcff2d","y"],
+    verde:["Verde","#3dff0d","g"],
+    azul:["Azul","#0d20ff","b"],
+    cyan:["Cyan","#00bcd4","c"],
+    fosfo:["Verde Fosfo","#cddc39","f"]
+   
+  },
+  colores2:{
+    morado:["Morado","#851792","m"],
+    violeta:["Violeta","#521792","v"],
+    
+    naranja:["Naranja","#ff9800","n"],
+    otroNaranja:["Naranja 2","#ff5722","o"],
+    rosa:["Rosa","#ff2288","p"],
+    rojo:["Rojo","#ff0d0d","r"],
+   
+  }
+}
+
+
+
+
+
+
+
+
 
 const success = {
   userUpdated: "¡Usuario actualizado exitosamente!",
@@ -88,6 +153,7 @@ const Catalogs = {
   estatus:estatus,
   pages:pages,
   toast:toast,
+  arduino:arduinoCodes
 }
 
 export default Catalogs;

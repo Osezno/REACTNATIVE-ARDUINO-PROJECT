@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-
+import { grids } from './constants/grids';
 const style = theme => {
   const css = StyleSheet.create({
     scrollView: {
@@ -11,23 +11,68 @@ const style = theme => {
       position: 'absolute',
       right: 0,
     },
-    body: {
-      //  backgroundColor: colors.,
+    switchWrap: {
+      margin: 15,
+
+      width: "100%",
+      flexDirection: "row"
     },
-    button: {
-      marginTop: 15,
-      backgroundColor: '#000'
+    buttonWrap: {
+      width: "100%",
+      flexDirection: "row",
+      justifyContent: 'center',
+      alignItems: 'center',
     },
-    sectionContainer:{
+    midButton: {
+      flex: 0.45,
+    },
+    largeButton: {
+      flex: 0.9,
+      margin: 5
+    },
+    sectionContainer: {
       marginTop: 32,
       marginBottom: 32,
       paddingHorizontal: 24,
       backgroundColor: theme.color.primary
     },
+    titleWrap: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom: 5,
+      marginTop: 5,
+    },
+    colorWrap:{
+      flexDirection: 'row',
+      width:"100%",
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom: 5,
+      marginTop: 5,
+    },
+    color:{
+      flex: 0.2,
+      margin: 5
+    },
     sectionTitle: {
-      fontSize: 24,
+      fontSize: 18,
       fontWeight: '600',
-      color: Colors.black,
+      alignItems: "center",
+      color:"#607d8b",
+    },
+    modalText: {
+      fontSize: 20,
+      marginBottom:12,
+      fontWeight: '600',
+      alignItems: "center",
+      color:"#607d8b",
+    },
+    sectionTitleRGB: {
+      fontSize: 18,
+      fontWeight: '600',
+      alignItems: "center",
+      color: "#607d8b",
     },
     sectionDescription: {
       marginTop: 8,
@@ -46,6 +91,35 @@ const style = theme => {
       paddingRight: 12,
       textAlign: 'right',
     },
+    centeredView: {
+      flex: 1,
+      height:"40%",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "white",
+      marginTop: 22
+    },
+    submit:{
+      marginRight:40,
+      marginLeft:40,
+      marginTop:10,
+      paddingTop:20,
+      paddingBottom:20,
+      backgroundColor:'#68a0cf',
+      borderRadius:10,
+      borderWidth: 1,
+      borderColor: '#fff'
+    },
+    modalView: {
+      height:"40%",
+      margin: 20,
+      backgroundColor: "white",
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      shadowColor: "#000",
+     
+    }
   });
   return css
 }

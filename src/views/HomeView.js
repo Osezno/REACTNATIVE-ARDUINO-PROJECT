@@ -10,23 +10,120 @@ import {
     Switch,
     StatusBar,
     FlatList,
+    Alert,
+    Modal,
+    TouchableHighlight,
 } from 'react-native';
 import BluetoothSerial from 'react-native-bluetooth-serial'
-
-import css from '../app.styles';
+import catalogs from '../constants/catalogs'
+import style from '../app.styles';
+import { useTheme } from 'react-native-paper';
 
 const HomeView = ({ navigation }) => {
     // USEsTATE
+    const tema = useTheme();
+    let css = style(tema)
+    const { arduino } = catalogs;
+    const { onOFF, BPM, patrones, patronesDos, modos, colorSelected, colores, colores2 } = arduino;
     const [isEnabled, setIsEnabled] = useState(false);
     const [devices, setDevices] = useState([]);
     const [discovering, setDiscovering] = useState(false);
     const [connected, setConnected] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const BluetoothWrite = (code) => {
+        BluetoothSerial.write(code)
+            .then((res) => {
+                console.log(res);
+
+            })
+            .catch((err) => console.log(err.message))
+    }
+
+    const colorSelect = (code) => {
+        BluetoothSerial.write(code)
+            .then((res) => {
+                setModalVisible(true)
+            })
+            .catch((err) => console.log(err.message))
+    }
+    const colorSelection = (code) => {
+        BluetoothSerial.write(code)
+            .then((res) => {
+                setModalVisible(false)
+            })
+            .catch((err) => console.log(err.message))
+    }
+
+    const connectDevice = async (id) => {
+        BluetoothSerial.disconnect().then((res) => {
+            BluetoothSerial.connect(id)
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((err) => console.log(err.message))
+        })
+            .catch((err) => console.log(err.message))
+
+
+    }
+
 
     const renderItem = (item) => {
-        console.log(item)
-        return (<View >
-            <Text >{item.item.name}</Text>
+        return (<View key={item.item.id} >
+            {
+                connected ?
+                    <Button color={"#000"} title={` Desconectar`} onPress={() => BluetoothSerial.disconnect()} />
+                    : <Button color={"#000"} title={` ${item.item.name} Conectar`} onPress={() => connectDevice(item.item.id)} />
+            }
+
         </View>)
+    }
+
+    const onOffButton = (name, on, off) => {
+        return (
+            <View key={on} >
+                <View style={css.titleWrap}>
+                    <Text style={css.sectionTitle}>{name}</Text>
+                </View>
+                <View style={css.buttonWrap}>
+                    <View style={css.midButton}>
+                        <Button color={"#8bc34a"} title={`${"ON"}`} onPress={() => BluetoothWrite(on)} />
+                    </View>
+                    <View style={css.midButton}>
+                        <Button color={"#000"} title={`${"OFF"}`} onPress={() => BluetoothWrite(off)} />
+                    </View>
+                </View>
+            </View>
+        )
+    }
+
+    const bpmButton = (name, on, off) => {
+        return (
+            <View key={on} >
+                <View style={css.titleWrap}>
+                    <Text style={css.sectionTitle}>{name}</Text>
+                </View>
+                <View style={css.buttonWrap}>
+                    <View style={css.midButton}>
+                        <Button color={"#000"} title={`${on}`} onPress={() => BluetoothWrite(on)} />
+                    </View>
+                    <View style={css.midButton}>
+                        <Button color={"#9d2ab9"} title={`${(off == "N") ? "NP" : off}`} onPress={() => BluetoothWrite(off)} />
+                    </View>
+                </View>
+            </View>
+        )
+    }
+    const patternButtons = (name, code,) => {
+        return (
+            <View style={css.buttonWrap} key={code}>
+
+                <View style={css.largeButton}>
+                    <Button color={code ==="a" ? "#000" : "#ff1ecf"} title={`${name}`} onPress={() => BluetoothWrite(code)} />
+                </View>
+            </View>
+        )
     }
 
     const toggleBluetooth = (value) => {
@@ -43,25 +140,25 @@ const HomeView = ({ navigation }) => {
     }
 
     useEffect(() => {
+        BluetoothSerial.isConnected().then((res) => {
+            setConnected(res)
+        })
+
         Promise.all([
             BluetoothSerial.isEnabled(),
             BluetoothSerial.list()
         ]).then((values) => {
-            console.log(values)
             setIsEnabled(values[0])
             setDevices(values[1])
         })
-        
+
         BluetoothSerial.on('bluetoothEnabled', () => {
             Promise.all([
                 BluetoothSerial.isEnabled(),
                 BluetoothSerial.list()
             ]).then((values) => {
-                console.log(values)
-               // const [isEnabled, devices] = values
                 setDevices(values[1])
             })
-            
             BluetoothSerial.on('bluetoothDisabled', () => {
                 setDevices([])
             })
@@ -73,37 +170,88 @@ const HomeView = ({ navigation }) => {
     return (
         <>
             <StatusBar barStyle="dark-content" />
-            <SafeAreaView>
-                {/* <ScrollView
-                    contentInsetAdjustmentBehavior="automatic"
-                    style={css.scrollView}> */}
-                    <Header />
-                    <Text >Bluetooth Device List</Text>
-                    <View>
-                        <Switch
-                            value={isEnabled}
-                            onValueChange={(val) => toggleBluetooth(val)}
-                        />
+            <View style={css.switchWrap}>
+                <Text style={css.midButton}>Dispositivos Bluetooth</Text>
+                <Switch
+                    style={css.midButton}
+                    value={isEnabled}
+                    onValueChange={(val) => toggleBluetooth(val)}
+                />
+            </View>
+            <View>
+
+                <FlatList
+                    data={devices}
+                    keyExtractor={item => item.id}
+                    renderItem={(item) => renderItem(item)}
+                />
+
+
+            </View>
+            <ScrollView>
+                <SafeAreaView>
+                    <View >
+                        {Object.keys(onOFF).map((prop) => onOffButton(onOFF[prop][0], onOFF[prop][1], onOFF[prop][2]))}
                     </View>
-                    <FlatList
-                        style={{ flex: 1 }}
-                        data={devices}
-                        keyExtractor={item => item.id}
-                        renderItem={(item) => renderItem(item)}
-                    />
-                    <View style={css.body}>
-                        <View style={css.sectionContainer}>
-                           
-                            <Button
-                                style={css.button}
-                                title="Go to Details"
-                                onPress={() => navigation.navigate('Details', { post: "holi" })}
-                            />
+                </SafeAreaView>
+
+                <View style={css.titleWrap}>
+                    <Text style={css.sectionTitleRGB}>RGB</Text>
+                </View>
+                <View style={css.colorWrap}>
+                    {Object.keys(colorSelected).map((prop) =>
+                        <View style={css.midButton}>
+                            <Button color={"#607d8b"} key={prop} title={`${colorSelected[prop][0]}`} onPress={() => colorSelect(colorSelected[prop][1])} />
+                        </View>
+
+                    )}
+                </View>
+                {Object.keys(patronesDos).map((prop) => bpmButton("Repetir", patronesDos[prop][0], patronesDos[prop][1]))}
+                {Object.keys(BPM).map((prop) => bpmButton("Velocidad", BPM[prop][0], BPM[prop][1]))}
+                <View style={css.titleWrap}>
+                    <Text style={css.sectionTitleRGB}>Secuencias</Text>
+                </View>
+                {Object.keys(patrones).map((prop) => patternButtons(patrones[prop][0], patrones[prop][1], true))}
+                {Object.keys(modos).map((prop) => onOffButton(modos[prop][0], modos[prop][1], modos[prop][2]))}
+            </ScrollView>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    Alert.alert("Color Seleccionado");
+                    setModalVisible(!modalVisible);
+                }}
+            >
+                <View style={css.centeredView}>
+                    <View style={css.modalView}>
+                        <Text style={css.modalText}>Elige un color</Text>
+                        <View style={css.colorWrap}>
+                            {Object.keys(colores).map((prop) =>
+                                <View style={css.color}>
+                                    <Button color={colores[prop][1]} key={prop} title={""} onPress={() => colorSelection(colores[prop][2])} />
+                                </View>
+                            )}
+                        </View>
+                        <View style={css.colorWrap}>
+                            {Object.keys(colores2).map((prop) =>
+                                <View style={css.color}>
+                                    <Button color={colores2[prop][1]} key={prop} title={""} onPress={() => colorSelection(colores2[prop][2])} />
+                                </View>
+                            )}
+
                         </View>
 
                     </View>
-                {/* </ScrollView> */}
-            </SafeAreaView>
+                    <View style={css.buttonWrap} key={"a"}>
+                        <View style={css.largeButton}>
+                            <Button  key={"a"} color={"#000"} title={"Cancelar"} onPress={() => setModalVisible(false)} />
+                        </View>
+                    </View>
+
+
+                </View>
+            </Modal>
         </>
     );
 };

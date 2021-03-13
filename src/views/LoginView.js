@@ -20,7 +20,6 @@ const LoginView = (props) => {
     return (
         <View style={css.sectionContainer}>
             <SignInForm addAuthUser={(authUser) => { addAuthUser(authUser) }} addToast={(toast) => addToast(toast)} />
-
             <Button
                 style={css.button}
                 title="Go to Home... again"

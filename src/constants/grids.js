@@ -3,11 +3,7 @@ import breakpoints from './breakpoints';
 
 const space = 2
 const basicGrid = {
-    display: 'grid',
-    padding: space,
-    gridGap: '16px',
-    justifyContent: 'center',
-    width: '100%',
+    flexDirection: "row",
 }
 const grids = {
     oneColumnGrid: {
