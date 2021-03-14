@@ -18,13 +18,13 @@ import BluetoothSerial from 'react-native-bluetooth-serial'
 import catalogs from '../constants/catalogs'
 import style from '../app.styles';
 import { useTheme } from 'react-native-paper';
-//import { Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements';
 const HomeView = ({ navigation }) => {
     // USEsTATE
     const tema = useTheme();
     let css = style(tema)
     const { arduino } = catalogs;
-    const { onOFF, BPM, patrones, patronesDos, modos, colorSelected, colores, colores2 ,colores3} = arduino;
+    const { onOFF, BPM, patrones, patronesDos, modos, colorSelected, colores, colores2, colores3 } = arduino;
     const [isEnabled, setIsEnabled] = useState(false);
     const [devices, setDevices] = useState([]);
     const [discovering, setDiscovering] = useState(false);
@@ -80,18 +80,33 @@ const HomeView = ({ navigation }) => {
         </View>)
     }
 
-    const onOffButton = (name, on, off) => {
+    const onOffButton = (name, on, off, icon, color) => {
         return (
             <View key={on} >
-                <View style={css.titleWrap}>
-                    <Text style={css.sectionTitle}>{name}</Text>
-                </View>
+             
                 <View style={css.buttonWrap}>
-                    <View style={css.midButton}>
-                        <Button color={"#8bc34a"} title={`${"ON"}`} onPress={() => BluetoothWrite(on)} />
+                    <View style={css.titleWrap}>
+                        <Text style={css.sectionTitle}>{name}</Text>
                     </View>
                     <View style={css.midButton}>
-                        <Button color={"#000"} title={`${"OFF"}`} onPress={() => BluetoothWrite(off)} />
+                        <Icon
+                            reverse
+                            name={icon}
+                            type='ionicon'
+                            color={color}
+                            onPress={() => BluetoothWrite(on)}
+                        />
+                     
+                    </View>
+                    <View style={css.midButton}>
+                        <Icon
+                            reverse
+                            name={icon}
+                            type='ionicon'
+                            color='#000'
+                            onPress={() => BluetoothWrite(off)}
+                        />
+                       
                     </View>
                 </View>
             </View>
@@ -105,10 +120,10 @@ const HomeView = ({ navigation }) => {
                     <Text style={css.sectionTitle}>{name}</Text>
                 </View>
                 <View style={css.buttonWrap}>
-                    <View style={css.midButton}>
+                    <View style={css.rgbMidButton}>
                         <Button color={"#000"} title={`${on}`} onPress={() => BluetoothWrite(on)} />
                     </View>
-                    <View style={css.midButton}>
+                    <View style={css.rgbMidButton}>
                         <Button color={"#9d2ab9"} title={`${(off == "N") ? "NP" : off}`} onPress={() => BluetoothWrite(off)} />
                     </View>
                 </View>
@@ -174,6 +189,11 @@ const HomeView = ({ navigation }) => {
             <StatusBar barStyle="dark-content" />
             <View style={css.switchWrap}>
                 <Text style={css.midButton}>Dispositivos Bluetooth</Text>
+                <Icon
+                    name='radio-outline'
+                    type='ionicon'
+                    color='#517fa4'
+                />
                 <Switch
                     style={css.midButton}
                     value={isEnabled}
@@ -193,17 +213,18 @@ const HomeView = ({ navigation }) => {
             <ScrollView>
                 <SafeAreaView>
                     <View >
-                        {Object.keys(onOFF).map((prop) => onOffButton(onOFF[prop][0], onOFF[prop][1], onOFF[prop][2]))}
+                        {Object.keys(onOFF).map((prop) => onOffButton(onOFF[prop][0], onOFF[prop][1], onOFF[prop][2], onOFF[prop][3], onOFF[prop][4]))}
+                        {Object.keys(modos).map((prop) => onOffButton(modos[prop][0], modos[prop][1], modos[prop][2], modos[prop][3], modos[prop][4]))} 
                     </View>
                 </SafeAreaView>
 
-                <View style={css.titleWrap}>
+                <View style={css.rgbTitleWrap}>
                     <Text style={css.sectionTitleRGB}>RGB</Text>
                 </View>
                 <View style={css.colorWrap}>
                     {Object.keys(colorSelected).map((prop) =>
-                        <View style={css.midButton} key={prop}>
-                            <Button color={"#607d8b"}  title={`${colorSelected[prop][0]}`} onPress={() => colorSelect(colorSelected[prop][1])} />
+                        <View style={css.rgbMidButton} key={prop}>
+                            <Button color={"#607d8b"} title={`${colorSelected[prop][0]}`} onPress={() => colorSelect(colorSelected[prop][1])} />
                         </View>
 
                     )}
@@ -220,7 +241,7 @@ const HomeView = ({ navigation }) => {
 
                 <Icon
                     reverse
-                    name='sc-telegram'
+                    name='flower-outline'
                     type='ionicon'
                     color='#517fa4'
                 /> */}
@@ -230,7 +251,7 @@ const HomeView = ({ navigation }) => {
                     <Text style={css.sectionTitleRGB}>Secuencias</Text>
                 </View>
                 {Object.keys(patrones).map((prop) => patternButtons(patrones[prop][0], patrones[prop][1], true))}
-                {Object.keys(modos).map((prop) => onOffButton(modos[prop][0], modos[prop][1], modos[prop][2]))}
+
             </ScrollView>
             <Modal
                 animationType="slide"
@@ -268,7 +289,7 @@ const HomeView = ({ navigation }) => {
                     </View>
                     <View style={css.buttonWrap} key={"a"}>
                         <View style={css.largeButton}>
-                            <Button key={"a"} color={"#000"} title={"Cancelar"} onPress={() => setModalVisible(false)} />
+                            <Buttoncolor={"#000"} title={"Cancelar"} onPress={() => setModalVisible(false)} />
                         </View>
                     </View>
                 </View>

@@ -28,9 +28,9 @@ const errors = {
 }
 const arduinoCodes = {
   onOFF:{
-    abanico:["Abanico","3", "2"],
-    focoRosa:["Foco Rosa","7","6"],
-    focoAzul:["Foco Azul", "5","4"], 
+    abanico:["Abanico","3", "2", 'flower-outline',"#8bc34a"],
+    focoRosa:["Foco Rosa","7","6", 'bulb-outline',"rgb(250,0,150)"],
+    focoAzul:["Foco Azul", "5","4",'bulb-outline', "rgb(0,150,150)"], 
   },
   BPM:{
     aumentarBPM:["-" , "+"],
@@ -51,10 +51,11 @@ const arduinoCodes = {
     repeat:["R","N"],
   },
   modos:{
-    onEjercicio:["Ejercicio","E", "e"],
-    onDuoEstrobo:["Duo Estrobo","Z","z"],
-    onEstroboRosa:["Estrobo Rosa","H", "h"],
-    onEstroboAzul:["Estrobo Azúl","Q","q"],
+    onEjercicioC:["Ej Cardio","E", "e",'body-outline',"rgb(0,250,128)"],
+    onEjercicio:["Ej Peso","E", "e",'barbell-outline',"rgb(255,50,50)"],
+    onDuoEstrobo:["Duo Estrobo","Z","z",'flash-outline',"rgb(150,0,150)"],
+    onEstroboRosa:["Estrobo Rosa","H", "h",'flash-outline',"rgb(250,0,150)"],
+    onEstroboAzul:["Estrobo Azúl","Q","q",'flash-outline',"rgb(0,150,150)"],
   },
   colorSelected:{
     color1:["Color 1", "A"],
@@ -92,7 +93,10 @@ const arduinoCodes = {
 }
 
 
-
+// Perform a full-body athletic movement, such as the power clean, power snatch, or snatch pull for 8–12 reps. Immediately following the strength movement, move to a cardiac conditioning effort for 2–4 minutes and work at 90–95 percent of your maximum heart rate. After completing this round, rest for two minutes and begin again, performing three total rounds.
+// Following the three rounds, take a 5-minute complete rest. Let’s face it: you’ve earned it. But you’re only 30 percent done.
+// Following the 5-minute rest, repeat the format first used, again using a whole-body strength movement, but this time substitute a grinding-type movement such as the front squat. Perform 3 total rounds and then take another well-earned 5-minute break.
+// The final stage is a bodyweight circuit using exercises performed at high pace for 6–12 reps, each with minimal rest between movements. Rest no longer than a minute between circuits. Complete 3–5 circuits.
 
 
 

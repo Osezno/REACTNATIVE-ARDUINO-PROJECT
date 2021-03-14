@@ -23,8 +23,19 @@ const style = theme => {
       justifyContent: 'center',
       alignItems: 'center',
     },
+    bpmButtonWrap: {
+      width: "100%",
+      flexDirection: "row",
+   
+    },
     midButton: {
-      flex: 0.45,
+      flex: 0.35,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    rgbMidButton: {
+      flex: 0.50,
+     
     },
     largeButton: {
       flex: 0.9,
@@ -37,11 +48,20 @@ const style = theme => {
       backgroundColor: theme.color.primary
     },
     titleWrap: {
+      flex: 0.35,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      marginBottom: 5,
-      marginTop: 5,
+      marginBottom: 15,
+      marginTop: 15,
+    },
+    rgbTitleWrap: {
+      flex: 0.35,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom: 15,
+      marginTop: 35,
     },
     colorWrap:{
       flexDirection: 'row',
