@@ -26,7 +26,6 @@ const style = theme => {
     bpmButtonWrap: {
       width: "100%",
       flexDirection: "row",
-   
     },
     midButton: {
       flex: 0.35,
@@ -34,8 +33,7 @@ const style = theme => {
       alignItems: 'center',
     },
     rgbMidButton: {
-      flex: 0.50,
-     
+      flex: 0.50
     },
     largeButton: {
       flex: 0.9,
@@ -138,8 +136,10 @@ const style = theme => {
       padding: 35,
       alignItems: "center",
       shadowColor: "#000",
-     
-    }
+    },
+    highlight: {
+      fontWeight: '700',
+    },
   });
   return css
 }

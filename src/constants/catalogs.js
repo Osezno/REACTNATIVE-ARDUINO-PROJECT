@@ -52,7 +52,7 @@ const arduinoCodes = {
   },
   modos:{
     onEjercicioC:["Ej Cardio","E", "e",'body-outline',"rgb(0,250,128)"],
-    onEjercicio:["Ej Peso","E", "e",'barbell-outline',"rgb(255,50,50)"],
+  //  onEjercicio:["Ej Peso","E", "e",'barbell-outline',"rgb(255,50,50)"],
     onDuoEstrobo:["Duo Estrobo","Z","z",'flash-outline',"rgb(150,0,150)"],
     onEstroboRosa:["Estrobo Rosa","H", "h",'flash-outline',"rgb(250,0,150)"],
     onEstroboAzul:["Estrobo Azúl","Q","q",'flash-outline',"rgb(0,150,150)"],

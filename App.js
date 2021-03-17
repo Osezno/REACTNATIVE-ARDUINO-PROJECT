@@ -14,6 +14,17 @@ import grids from './src/constants/grids';
 import typography from './src/constants/typography';
 //import shadows from './src/constants/shadows';
 import animations from './src/constants/animations';
+import SQLite from 'react-native-sqlite-storage';
+
+global.db = SQLite.openDatabase({
+  name:'testDB.sqlite3',
+  createFromLocation:'~ReactDuinoDB.db',
+  location:'Library'},
+  () =>{},
+  error => {
+    console.log("ERROR: " + error);
+  }
+);
 
 const theme = {
   ...DefaultTheme,
