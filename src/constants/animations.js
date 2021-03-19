@@ -12,7 +12,6 @@ const animations = {
       opacity: 1
     }
   },
-
   '@keyframes fadeDown': {
     "from": {
       opacity: 0,

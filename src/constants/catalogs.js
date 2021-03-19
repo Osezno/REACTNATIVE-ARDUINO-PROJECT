@@ -18,7 +18,6 @@ const errors = {
   name: "Nombre incorrecto",
   invalidName: "El nombre no es valido",
   invalidNumber:"El numero no es valido",
-  //for login password?
   noUser: "El usuario no existe en el sistema",
   session: "Sesión invalida",
   denied: "Permisos insuficientes",
@@ -26,6 +25,21 @@ const errors = {
   recovery: "Tu token expiro o es incorrecto",
   serverError: "Estamos experimentando problemas, nuestros tecnicos estan trabajando para resolverlos."
 }
+
+const Tones = [
+  "C",
+  "C♯",
+  "D",
+  "D♯",
+  "E",
+  "F",
+  "F♯",
+  "G",
+  "G♯",
+  "A",
+  "A♯",
+  "B",
+]
 const arduinoCodes = {
   onOFF:{
     abanico:["Abanico","3", "2", 'flower-outline',"#8bc34a"],
@@ -33,12 +47,13 @@ const arduinoCodes = {
     focoAzul:["Foco Azul", "5","4",'bulb-outline', "rgb(0,150,150)"], 
   },
   BPM:{
-    aumentarBPM:["-" , "+"],
+    aumentarBPM:["-" , "+", "swap-vertical-outline"],
   },
   patrones:{
     apagarNP:["Apagar", "a"],
     mismoColor:["Mismo color","O"],
     unoYuno:["Uno y uno","U"],
+    //audioReact "V"
     mitadYmitad:["Mitad y mitad","M"],
     tres:["Tres","T"],
     choque:["Choque","X"],
@@ -48,18 +63,20 @@ const arduinoCodes = {
     randoms:["Aleatorio","J"],
   },
   patronesDos:{
-    repeat:["R","N"],
+    repeat:["R","N","infinite-outline"],
   },
   modos:{
-    onEjercicioC:["Ej Cardio","E", "e",'body-outline',"rgb(0,250,128)"],
-  //  onEjercicio:["Ej Peso","E", "e",'barbell-outline',"rgb(255,50,50)"],
+    onEjercicioC:["Cardio","E", "e",'body-outline',"rgb(0,250,128)"],
+    audio:["React to audio","StartAudio", "StopAudio",'mic-circle-outline',"rgb(150,0,250)"],
     onDuoEstrobo:["Duo Estrobo","Z","z",'flash-outline',"rgb(150,0,150)"],
     onEstroboRosa:["Estrobo Rosa","H", "h",'flash-outline',"rgb(250,0,150)"],
     onEstroboAzul:["Estrobo Azúl","Q","q",'flash-outline',"rgb(0,150,150)"],
   },
   colorSelected:{
-    color1:["Color 1", "A"],
-    color2:["Color 2", "B"],
+    color3:["Color 1", "A"],
+    color4:["Color 2","B"]
+  },
+  colorSelected2:{
     color3:["Color 3", "C"],
     color4:["Color 4","D"]
   },
@@ -80,16 +97,14 @@ const arduinoCodes = {
     rojo:["Rojo","rgb(150,0,0)","r"], 
   },
   colores3:{
-    fosfo:["Verde Fosfo","rgb(150,250,0)","f"],
-    magenta:["Amarillo 2","rgb(250,0,250)","i"],
+    gris:["gris","rgb(150,250,0)","f"],
+    magenta:["magenta","rgb(250,0,250)","i"],
     spring:["Amarillo","rgb(0,250,128)","k"],
     azure:["Verde","rgb(0,128,250)","ñ"],
     azul:["Azul","rgb(0,255,204)","("],
-    cyan:["Cyan","rgb(255,50,50)",")"],
-    fosfo:["Verde Fosfo","rgb(150,150,150)",";"]
-   
-  },
-
+    cyan2:["Cyan","rgb(255,50,50)",")"],
+    fosfo:["Verde Fosfo","rgb(150,150,150)",";"] 
+  }
 }
 
 
@@ -160,6 +175,7 @@ const Catalogs = {
   pageInfo: pageInfo,
   errors:errors,
   success: success,
+  Tones:Tones,
   rol:rol,
   estatus:estatus,
   pages:pages,

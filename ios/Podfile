@@ -12,6 +12,8 @@ target 'firstApp' do
 
   pod 'react-native-sqlite-storage', :path => '../node_modules/react-native-sqlite-storage'
 
+  pod 'react-native-recording', :path => '../node_modules/react-native-recording'
+
   target 'firstAppTests' do
     inherit! :complete
     # Pods for testing
